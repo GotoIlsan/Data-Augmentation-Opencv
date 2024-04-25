@@ -19,6 +19,8 @@ Example Data for [BG-20K](https://www.kaggle.com/datasets/nguyenquocdungk16hl/bg
 사용자는 data_augmentation.py의 최상단, Hyper Parameters만 수정하면 됩니다.
 현재 배경 이미지 폴더로 "BG-20k"를, 증강 데이터 폴더로 GreenLights, RedLights가 예시로 제공됩니다.
 
+이때 파일 명과 경로는 모두 영어로 작성되어야 합니다.
+
 이후 코드를 실행하면, YOLOv8 학습에 필요한 datasets.yaml이 생성됩니다. 사용자는 위 Datasets를 이용하여 YOLOv8 학습을 수행하면 됩니다. 각 Hyper Parameter에 대한 설명은 아래와 같습니다.
 
 1. back_ground_images_folder(String): 배경 이미지 폴더의 이름

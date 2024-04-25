@@ -57,8 +57,6 @@ def data_augmentation(bg, obj, mask, class_id, obj_number, FLAG_train):
     x_offset = random.randint(0, width_bg - width_obj)
     y_offset = random.randint(0, height_bg - height_obj)
 
-    create_label_file(bg, obj, x_offset, y_offset, class_id, obj_number, FLAG_train)
-
     y1, y2 = y_offset, y_offset + height_obj
     x1, x2 = x_offset, x_offset + width_obj
 
@@ -76,6 +74,7 @@ def data_augmentation(bg, obj, mask, class_id, obj_number, FLAG_train):
 
     #cv2.imshow("Ouput", bg)
     #cv2.waitKey(0)
+    create_label_file(bg, obj, x_offset, y_offset, class_id, obj_number, FLAG_train)
     cv2.imwrite(output_path, bg)
     return
 
@@ -186,7 +185,10 @@ if __name__ == "__main__":
             original_ratio = obj.shape[0]/obj.shape[1]
             obj = cv2.resize(obj, (mean_width, int(mean_width * original_ratio)), interpolation=cv2.INTER_LINEAR)
             obj, mask = img_transform(obj)
-            data_augmentation(bg, obj, mask, class_id, i, FLAG_train)
+            try:
+                data_augmentation(bg, obj, mask, class_id, i, FLAG_train)
+            except Exception as e:
+                pass
 
         if i % 100 == 0:
             print(f"Maked Images num: {i}, Reamining Images num: {back_ground_counts-i}, Progress Ratio: {i/back_ground_counts*100}%")
